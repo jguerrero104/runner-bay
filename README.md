@@ -22,7 +22,7 @@ Before you begin, ensure you have met the following requirements:
 
 3. Navigate to the project directory:
     ```bash
-    cd runnner-bay
+    cd runner-bay
     ```
 
 4. Install the dependencies:
