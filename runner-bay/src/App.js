@@ -4,7 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from './Layout';
 import Listings from './Listings';
 import News from './News';
-import About from './About';
+import About from './About'
+import LostAndFound from './LostAndFound';
 import Home from './Home';
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="listings" element={<Listings />} />
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />
+          <Route path="lostandfound" element={<LostAndFound />} />
         </Routes>
       </Layout>
     </Router>

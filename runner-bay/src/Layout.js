@@ -13,6 +13,7 @@ const Layout = ({children}) => {
           <Nav.Link as={Link} to="/listings">Listings</Nav.Link>
           <Nav.Link as={Link} to="/news">News</Nav.Link>
           <Nav.Link as={Link} to="/about">About</Nav.Link>
+          <Nav.Link as={Link} to="/lostandfound">Lost & Found</Nav.Link>
         </Nav>
         <Dropdown>
           <Dropdown.Toggle variant="dark">
