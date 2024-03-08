@@ -7,6 +7,8 @@ import News from './News';
 import About from './About'
 import LostAndFound from './LostAndFound';
 import Home from './Home';
+import Profile from './Profile';
+import Settings from './Settings';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />
           <Route path="lostandfound" element={<LostAndFound />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Routes>
       </Layout>
     </Router>
