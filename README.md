@@ -9,6 +9,15 @@ Before you begin, ensure you have met the following requirements:
 - You have installed the latest version of Node.js and npm
 - You have installed Git
 
+### Hot Fix
+If having issues running web application
+
+1. Once in cd runner-bay, remove the last package-lock.json
+
+2. npm install again
+
+Web app should run now.
+
 
 ### Installation
 
