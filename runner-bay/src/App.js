@@ -9,10 +9,14 @@ import LostAndFound from './LostAndFound';
 import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
+import Login from './Login';
+import Register from './Register';
+import { AuthProvider } from './AuthContext';
 
 
 function App() {
   return (
+    <AuthProvider>
     <Router> 
       <Layout>
         <Routes>
@@ -23,9 +27,12 @@ function App() {
           <Route path="lostandfound" element={<LostAndFound />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
+          <Route path ="login" element={<Login />} />
+          <Route path ="register" element={<Register />} />
         </Routes>
       </Layout>
     </Router>
+    </AuthProvider>
   );
 }
 
