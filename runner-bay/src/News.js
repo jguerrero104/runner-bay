@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './News.css';
 
-function News() {
+//function News() {
   const newsItems = [
-
+    
     //SPOTLIGHT NEWS ONLY
-    { id: 1, title: '', 
+    { id: 1, title: 'UTSA professor reveals buzz on bee behavior during eclipses', 
     content: 'https://www.utsa.edu/today/2024/03/story/profess-reveals-buzz-on-bees-during-the-eclipse.html', 
     imageUrl: 'https://www.utsa.edu/today/2024/images/bees-ozturk_780.png', spotlight: true},
 
@@ -72,6 +72,8 @@ function News() {
 
     
   ];
+
+  function News() {
   //filter spotlight news and regular articles
   const spotlightNews = newsItems.filter(news => news.spotlight);
   const regularNews = newsItems.filter(news => !news.spotlight);
@@ -145,5 +147,5 @@ function News() {
     </div>
   );
 }
-
-export default News;
+export { newsItems, News};
+//export default News;
