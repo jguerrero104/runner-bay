@@ -1,0 +1,109 @@
+.top-news h1 {
+    font-size: 50px; /* Reduce font size for Top News */
+    text-align: left; /* Align the "Top News" text to the left */
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
+    margin-bottom: 5px; /* Add bottom margin to separate from news feed */
+}
+
+.top-news .news-feed {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for Top News */
+    grid-auto-rows: 450px; /* Set a fixed height for the rows */
+    grid-gap: 30px;
+}
+
+.top-news .news-item {
+    border: 10px solid white;
+    padding: 0px;
+    cursor: pointer;
+    display: grid; /* Add this line to make each news item a grid container */
+    grid-template-rows: auto 1fr; /* Adjust row height as needed */
+    grid-gap: 10px;
+    position: relative;
+    overflow: hidden; /* Hide any overflow content */
+    border-radius: 43px; /* Add rounded corners */
+}
+
+.top-news .news-item img {
+    width: 105%;
+    height: 100%; /* Constrain image height to fill its container */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+
+.top-news .news-item h2, 
+.top-news .news-item p { /* Add this block */
+    position: absolute;
+    left: 10px; /* Adjust as needed */
+    bottom: 10px; /* Adjust as needed */
+    color: white; /* Text color */
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
+    border-radius: 10px; /* Add rounded corners */
+    width: calc(100% - 20px); /* Subtract padding from width */
+    z-index: 1; /* Ensure text is above the image */
+}
+
+/* Update the CSS for Regular Articles */
+
+.regular-news {
+    margin-top: 40px;
+}
+
+.regular-news h1 {
+    font-size: 50px; /* Reduce font size for Top News */
+    text-align: left; /* Align the "Top News" text to the left */
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
+    margin-bottom: 10px; /* Add bottom margin to separate from news feed */
+}
+
+.regular-news .news-feed {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust column width as needed */
+    grid-auto-rows: minmax(200px, auto); /* Set minimum row height to prevent text layering */
+    grid-gap: 30px;
+}
+
+.regular-news .news-item {
+    border: 10px solid white;
+    padding: 0px;
+    cursor: pointer;
+    display: grid; /* Add this line to make each news item a grid container */
+    grid-template-rows: auto 1fr; /* Adjust row height as needed */
+    grid-gap: 10px;
+    position: relative;
+    overflow: hidden; /* Hide any overflow content */
+    border-radius: 43px; /* Add rounded corners */
+}
+.regular-news .news-item h2,
+.regular-news .news-item p {
+    position: absolute;
+    left: 10px; /* Adjust as needed */
+    bottom: 10px; /* Adjust as needed */
+    color: white; /* Text color */
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
+    border-radius: 10px; /* Add rounded corners */
+    width: calc(100% - 20px); /* Subtract padding from width */
+    z-index: 1; /* Ensure text is above the image */
+}
+
+
+.regular-news .news-item img {
+    width: 100%;
+    height: 105%; /* Remove fixed height to maintain aspect ratio */
+    object-fit: cover;
+}
+
+.regular-news .news-item h2 {
+    font-weight: bold;
+    margin: 0;
+}
+
+
