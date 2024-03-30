@@ -1,6 +1,6 @@
 # RunnerBay
 
-# Group 2 Project - Jose Guerrero, Julian A Legere, Jesus A Alberto Pinales, Bianca L Perez
+# Group 2 Project - Jose Guerrero, Julian A Legere, Jesus Alberto Pinales, Bianca L Perez
 
 ## Prerequisites
 
