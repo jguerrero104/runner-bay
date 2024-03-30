@@ -1,27 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import axios from "axios"; // Make sure to import axios
 
 const Register = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform validation checks
     if (password !== confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
 
-    // Send a request to backend to register the user
-    console.log("Registering user...");
+    try {
+      const response = await axios.post('http://localhost:3000/api/register', {
+        username, // Include username in the request payload
+        email,
+        password
+      });
 
-    // Redirect the user to the login page after successful registration
-    navigate("/login");
+      if (response.status === 201) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Registration failed. Please try again.");
+    }
   };
 
   return (
@@ -29,6 +39,15 @@ const Register = () => {
       <Row>
         <Col md={6} className="mx-auto">
           <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email:</Form.Label>
               <Form.Control
