@@ -1,0 +1,47 @@
+.home-news-slider {
+    height: 890px; /* Set a fixed height for the slider */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.home-news-item {
+    border: 13px solid #0C2340; /* Change border color */
+    padding: 0px;
+    height: 230px; /* Set height to your desired value */
+    cursor: pointer;
+    display: grid; /* Add this line to make each news item a grid container */
+    grid-template-rows: auto 1fr; /* Adjust row height as needed */
+    grid-gap: 10px;
+    position: relative;
+    overflow: hidden; /* Hide any overflow content */
+    border-radius: 50px; /* Add rounded corners */
+}
+
+.home-news-item:hover {
+    background-color: #f0f0f0;
+}
+.home-news-item img {
+    width: 100%; /* Ensure the image spans the full width of its container */
+    height: 105%; /* Allow the image to adjust its height proportionally */
+    object-fit: cover; /* Ensure the image covers the container without stretching */
+  }
+
+.home-news-item h2 {
+    position: absolute;
+    left: 10px; /* Adjust as needed */
+    bottom: 10px; /* Adjust as needed */
+    color: white; /* Text color */
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
+    border-radius: 10px; /* Add rounded corners */
+    width: calc(100% - 20px); /* Subtract padding from width */
+    z-index: 1; /* Ensure text is above the image */
+}
+
+.runnerbay-header {
+    font-size: 50px; /* Adjust font size */
+    font-weight: bold; /* Make the font bold */
+    color: white; /* Text color */
+    text-align: center; /* Align the text to the center */
+    margin-top: 20px; /* Adjust margin as needed */
+}
