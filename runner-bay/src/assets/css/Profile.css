@@ -1,0 +1,74 @@
+  .profile-name {
+    font-size: 45px;
+    margin-bottom: 0; /* Remove space below the name */
+  }
+  
+  .profile-username {
+    font-size: 30px;
+    font-style: italic;
+    color: rgb(71, 71, 71);
+  }
+  
+  .profile-container {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    max-width: 600px; /* Set a max-width for the entire section */
+    padding: 0; /* Remove default paddings */
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the image and button */
+  }
+  
+  .profile-image {
+    width: 200px; /* Adjust the size as needed */
+    height: 200px;
+    margin-bottom: 1px; /* Space between the image and the button */
+  }
+  
+  .edit-button {
+    width: auto; 
+    margin-left: -233px; /* Adjust this value to shift the button to the left */
+    margin-bottom: 5px; /* Space between the image and the button */
+    background-color: rgb(0, 106, 255);
+    color: #000000;
+  }
+  
+  
+  .profile-listgroup {
+    width: 100%; /* The menu takes up full width of the 'profile-section' */
+    margin-top: 1rem; /* Space between edit button and list group */
+  }
+
+  .profile-listgroup .list-group-item {
+    background-color: #ffffff; /* Your desired background color */
+    color: #000000; /* Your desired text color */
+    /* Add other styles if needed */
+  }
+  
+  .content-area {
+    /* Style for the right-side content */
+    margin-top: 50px; 
+  }
+
+  .list-group-item.active {
+    background-color: #007bff; /* Bootstrap primary color */
+    border-color: #007bff;
+    color: white; /* Change text color to white */
+  }
+
+  .custom-card {
+    height: 350px; /* Set a fixed height */
+    width: 300px; /* Use 100% of the column width */
+    margin: auto; /* This centers the card in the column if the column is wider than the card */
+  }
+  
+  @media (max-width: 768px) {
+    .custom-card {
+      max-width: none; /* On smaller screens, allow the card to fill the column */
+    }
+  }
+
+  
