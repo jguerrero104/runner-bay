@@ -1,41 +1,25 @@
+ // Ensure this is at the top to load environment variables first
+require('dotenv').config();
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const express = require('express');
-const bcrypt = require('bcrypt');
-const connectToDatabase = require('./database'); // Import the function
-const app = express();
-const PORT = process.env.PORT || 3000;
+const connectToDatabase = require('./database'); // Function to connect to your database
+const setupAuthRoutes = require('./authRoutes'); // Setup function from authRoutes.js
 const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 3001; // Use a single PORT variable
 
 app.use(express.json());
 app.use(cors());
 
 // Establish the database connection
-let db;
-connectToDatabase().then(connection => {
-  db = connection;
-}).catch(error => {
-  console.error('Failed to connect to the database:', error);
-});
-
-// Registration endpoint
-app.post('/api/register', async (req, res) => {
-  const { username, email, password } = req.body;
-
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const [result] = await db.query(
-      'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', 
-      [username, email, hashedPassword, 'regular']
-    );
-    console.log('User registered successfully, user ID:', result.insertId);
-    res.status(201).send('User registered successfully');
-  } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).send('Registration failed');
-  }
-});
-
-// Other routes can be defined here
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+connectToDatabase()
+  .then(db => {
+    app.use('/', setupAuthRoutes(db)); // Use the router returned by setupAuthRoutes
+    
+    // Listen for incoming requests
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(error => {
+    console.error('Failed to connect to the database:', error);
+  });
