@@ -13,25 +13,30 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
-
+  
     try {
       const response = await axios.post('http://localhost:3001/api/register', {
         username, // Include username in the request payload
         email,
         password
       });
-
+  
       if (response.status === 201) {
         navigate("/login");
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("Registration failed. Please try again.");
+      // Adjust this to handle the specific error response from the backend
+      if (error.response && error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("Registration failed. Email or Username already taken.");
+      }
     }
   };
 

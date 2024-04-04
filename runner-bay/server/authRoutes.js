@@ -20,8 +20,28 @@ const setupAuthRoutes = (db) => {
     if (!email || !password || !username) {
       return res.status(400).json({ message: 'Username, email, and password are required.' });
     }
-
+  
     try {
+      // Check if the email or username already exists
+      const existingUser = await db.query(
+        'SELECT * FROM users WHERE email = ? OR username = ?',
+        [email, username]
+      );
+  
+      if (existingUser.length) {
+        // Check which attribute already exists and return a specific message
+        const isEmailTaken = existingUser.some(user => user.email === email);
+        const isUsernameTaken = existingUser.some(user => user.username === username);
+  
+        if (isEmailTaken && isUsernameTaken) {
+          return res.status(409).json({ message: 'Both email and username are already taken.' });
+        } else if (isEmailTaken) {
+          return res.status(409).json({ message: 'Email is already taken.' });
+        } else if (isUsernameTaken) {
+          return res.status(409).json({ message: 'Username is already taken.' });
+        }
+      }
+  
       const hashedPassword = await bcrypt.hash(password, 10);
       await db.query(
         'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', 

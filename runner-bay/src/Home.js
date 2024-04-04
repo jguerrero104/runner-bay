@@ -19,11 +19,18 @@ function Home() {
   return (
     <div className='home-news-slider'>
       <MarqueeSlider velocity={20}>
-        {regularNewsItem.map(news => (
-          <div key={`marquee-example-${news.id}`}  className='home-news-item' style={{ width: "70%" }}>
-            <img src={news.imageUrl} alt={news.title} onClick={() => openArticle(news.content)} />
+      {regularNewsItem.map(news => (
+          <a 
+            key={`marquee-example-${news.id}`}  
+            href={news.content} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className='home-news-item' 
+            style={{ width: "70%" }}
+          >
+            <img src={news.imageUrl} alt={news.title} />
             <h2>{news.title}</h2>
-          </div>
+          </a>
         ))}
       </MarqueeSlider>
     </div>
