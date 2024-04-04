@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import './Listings.css';
-function Listings() {
-  // state to manage list of items
-  const [items, setItems] = React.useState([]);
+import './Listings.css'; // Import the updated CSS file
 
-  // state to manage form inputs
+function Listings() {
+  const [items, setItems] = React.useState([]);
   const [formData, setFormData] = React.useState({
     name: '',
     description: '',
@@ -13,16 +11,13 @@ function Listings() {
     image: null
   });
 
-  //handle sumbission of form
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if(!formData.name || !formData.description || !formData.location || !formData.date || !formData.image){
+    if (!formData.name || !formData.description || !formData.location || !formData.date || !formData.image) {
       alert('Please fill out all fields');
       return;
     }
 
-    // item object
     const newItem = {
       name: formData.name,
       description: formData.description,
@@ -30,9 +25,7 @@ function Listings() {
       date: formData.date,
       image: formData.image
     };
-    // add new item to item array
     setItems([...items, newItem]);
-    //clear form data
     setFormData({
       name: '',
       description: '',
@@ -42,7 +35,6 @@ function Listings() {
     });
   };
 
-  //handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -51,7 +43,6 @@ function Listings() {
     });
   };
 
-  //handle file input change
   const handlefileChange = (e) => {
     setFormData({
       ...formData,
@@ -61,59 +52,57 @@ function Listings() {
 
   return (
     <div>
-      <h1>Listings</h1>
+      <h1 className="listings-h1">Market Place</h1>
       <form onSubmit={handleSubmit}>
-        <div className="input-container">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          placeholder="Item Name"
-          onChange={handleChange}
-        />
+        <div className="listings-input-container">
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            placeholder="Item Name"
+            onChange={handleChange}
+          />
         </div>
-        <div className="input-container">
-        <input
-          type="text"
-          name="description"
-          value={formData.description}
-          placeholder="Description"
-          onChange={handleChange}
-        />
+        <div className="listings-input-container">
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            placeholder="Description"
+            onChange={handleChange}
+          />
         </div>
-        <div className="input-container">
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          placeholder="Location"
-          onChange={handleChange}
-        />
+        <div className="listings-input-container">
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            placeholder="Location"
+            onChange={handleChange}
+          />
         </div>
-        <div className="input-container">
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-        />
+        <div className="listings-input-container">
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+          />
         </div>
-        <div className="input-container">
-        <input
-          id='imageUpload'
-          type="file"
-          name="image"
-          accept='image/*'
-          onChange={handlefileChange}
-        />
+        <div className="listings-input-container">
+          <input
+            id='imageUpload'
+            type="file"
+            name="image"
+            accept='image/*'
+            onChange={handlefileChange}
+          />
         </div>
-        <button type="Submit">Add Item</button>
-      
+        <button type="submit" className="listings-button">Add Item</button>
       </form>
-      {/* Display items */}
-      <div className='item-grid'>
+      <div className='listings-item-grid'>
         {items.map((item, index) => (
-          <div key={index} className='item-card'>
+          <div key={index} className='listings-item-card'>
             <img src={item.image instanceof Blob ? URL.createObjectURL(item.image) : item.image} alt={item.image} />
             <h2>{item.name}</h2>
             <p>{item.description}</p>
@@ -125,4 +114,6 @@ function Listings() {
     </div>
   );
 }
+
 export default Listings;
+
