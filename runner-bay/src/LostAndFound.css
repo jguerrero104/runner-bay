@@ -1,4 +1,4 @@
-h1 {
+.lostandfound-h1 {
     font-size: 50px; /* Reduce font size for Top News */
     text-align: center; /* Align the "Top News" text to the left */
     font-weight: bold;
@@ -7,65 +7,54 @@ h1 {
     margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
     margin-bottom: 20px; /* Add bottom margin to separate from news feed */
   }
-.input-container {
+.lostandfound-input-container {
     display: inline-block; /* Make the input containers sit next to each other */
     margin-right: 10px;
   }
   
-  .form-container {
+  .lostandfound-form-container {
     display: inline-block; /* Ensure the form container also behaves as inline-block */
     flex-wrap: wrap;
     gap: 10px;
   }
   
   /* Input fields */
-  input[type="text"],
-  input[type="date"],
-  input[type="file"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    margin-bottom: 10px;
-  }
-  
+.lostandfound-input-container input[type="text"],
+.lostandfound-input-container input[type="date"],
+.lostandfound-input-container input[type="file"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
   /* Button */
-  button[type="submit"] {
+  .lostandfound-button[type="submit"] {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     cursor: pointer;
   }
   
-  button[type="submit"]:hover {
+  .lostandfound-button[type="submit"]:hover {
     background-color: #0056b3;
   }
   
-  /* Custom file upload button */
-  .custom-file-upload {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
   
-  .custom-file-upload:hover {
+  .lostandfound-custom-file-upload:hover {
     background-color: #218838;
   }
   
-  .item-grid {
+  .lostandfound-item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
   }
   
   /* Individual item card */
-  .item-card {
-    border: 13px solid #0C2340;
+  .lostandfound-item-card {
     padding: 0px;
     cursor: pointer;
     display: grid; /* Add this line to make each news item a grid container */
@@ -77,23 +66,23 @@ h1 {
   }
   
   /* Image inside the item card */
-  .item-card img {
+  .lostandfound-item-card img {
     width: 100%;
     height: auto;
     border-radius: 4px;
   }
   
   /* Title */
-  .item-card h2 {
+  .lostandfound-item-card h2 {
     margin-top: 10px;
     margin-bottom: 5px;
   }
   
   /* Description */
-  .item-card p {
+  .lostandfound-item-card p {
     margin-bottom: 5px;
   }
 
-  .comment-section {
+  .lostandfound-comment-section {
     margin-top: 20px;
   }

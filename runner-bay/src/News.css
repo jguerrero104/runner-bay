@@ -10,12 +10,11 @@
 .top-news .news-feed {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns for Top News */
-    grid-auto-rows: 450px; /* Set a fixed height for the rows */
+    grid-auto-rows: minmax(200px, auto); /* Set minimum row height to prevent text layering */
     grid-gap: 30px;
 }
 
 .top-news .news-item {
-    border: 10px solid white;
     padding: 0px;
     cursor: pointer;
     display: grid; /* Add this line to make each news item a grid container */
@@ -23,7 +22,7 @@
     grid-gap: 10px;
     position: relative;
     overflow: hidden; /* Hide any overflow content */
-    border-radius: 43px; /* Add rounded corners */
+    border-radius: 35px; /* Add rounded corners */
 }
 
 .top-news .news-item img {
@@ -37,7 +36,7 @@
 .top-news .news-item p { /* Add this block */
     position: absolute;
     left: 10px; /* Adjust as needed */
-    bottom: 10px; /* Adjust as needed */
+    bottom: 20px; /* Adjust as needed */
     color: white; /* Text color */
     margin: 0;
     padding: 0;
@@ -70,7 +69,6 @@
 }
 
 .regular-news .news-item {
-    border: 10px solid white;
     padding: 0px;
     cursor: pointer;
     display: grid; /* Add this line to make each news item a grid container */
@@ -78,13 +76,13 @@
     grid-gap: 10px;
     position: relative;
     overflow: hidden; /* Hide any overflow content */
-    border-radius: 43px; /* Add rounded corners */
+    border-radius: 35px; /* Add rounded corners */
 }
 .regular-news .news-item h2,
 .regular-news .news-item p {
     position: absolute;
     left: 10px; /* Adjust as needed */
-    bottom: 10px; /* Adjust as needed */
+    bottom: 15px; /* Adjust as needed */
     color: white; /* Text color */
     margin: 0;
     padding: 0;
