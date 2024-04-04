@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import axios from "axios"; // Make sure to import axios
+import "./Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/register', {
+      const response = await axios.post('http://localhost:3001/api/register', {
         username, // Include username in the request payload
         email,
         password
@@ -35,10 +36,10 @@ const Register = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-      <Row>
-        <Col md={6} className="mx-auto">
-          <Form onSubmit={handleSubmit}>
+<Container className="register-container">
+  <Row className="register-row">
+    <Col md={6} className="mx-auto">
+      <Form onSubmit={handleSubmit} className="register-form">
             <Form.Group className="mb-3" controlId="username">
               <Form.Label>Username:</Form.Label>
               <Form.Control
@@ -75,13 +76,16 @@ const Register = () => {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Register
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+            <Button variant="primary" type="submit" className="register-button">
+          Register
+        </Button>
+      </Form>
+      <div className="link-container">
+        Already have an account? <Link to="/login">Login</Link>
+      </div>
+    </Col>
+  </Row>
+</Container>
   );
 };
 
