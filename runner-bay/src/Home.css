@@ -4,16 +4,16 @@
 }
 
 .home-news-item {
-    border: 13px solid #0C2340; /* Change border color */
     padding: 0px;
     height: 230px; /* Set height to your desired value */
     cursor: pointer;
+    margin-top: 10px; /* Adjust margin as needed */
     display: grid; /* Add this line to make each news item a grid container */
     grid-template-rows: auto 1fr; /* Adjust row height as needed */
     grid-gap: 10px;
     position: relative;
     overflow: hidden; /* Hide any overflow content */
-    border-radius: 50px; /* Add rounded corners */
+    border-radius: 30px; /* Add rounded corners */
 }
 
 .home-news-item:hover {
