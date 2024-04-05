@@ -55,5 +55,21 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "runner-bay-db.cbmmisgs8f96.us-east-2.rds.amazonaws.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "RunnerBaydbAWS",
+      "database": "runner-bay",
+      "username": "admin",
+      "askForPassword": true
+    }
+  ]
 }
