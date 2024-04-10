@@ -5,12 +5,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [id, setId] = useState(null); // Change from userID to id
 
   useEffect(() => {
-    // Check for token in local storage on initial load
     const token = localStorage.getItem('token');
-    if (token) {
+    const storedId = localStorage.getItem('id'); // Change from userID to id
+    if (token && storedId) {
       setIsLoggedIn(true);
+      setId(parseInt(storedId, 10)); // Convert to integer
     }
   }, []);
 
@@ -25,12 +27,14 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem('token', token); // Save token to local storage
+        const { token, id } = await response.json(); // Change from userID to id
+        console.log('Login response:', { token, id });
+        localStorage.setItem('token', token);
+        localStorage.setItem('id', String(id)); // Change from userID to id, convert to string
         setIsLoggedIn(true);
+        setId(id); // Change from setUserID to setId
         return { success: true };
       } else {
-        // Handle errors
         const errorResponse = await handleErrorResponse(response);
         throw new Error(errorResponse);
       }
@@ -41,11 +45,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token'); // Clear token from local storage
+    localStorage.removeItem('token');
+    localStorage.removeItem('id'); // Change from userID to id
     setIsLoggedIn(false);
+    setId(null); // Change from setUserID to setId
   };
 
-  // Helper function to handle non-OK responses
   async function handleErrorResponse(response) {
     const contentType = response.headers.get('content-type');
     if (contentType && contentType.indexOf('application/json') !== -1) {
@@ -57,7 +62,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, id, login, logout }}> 
       {children}
     </AuthContext.Provider>
   );

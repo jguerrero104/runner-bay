@@ -1,0 +1,49 @@
+.create-listing-page {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #1e131300;
+}
+
+.create-listing-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.create-listing-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create-listing-page label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.create-listing-page input[type="text"],
+.create-listing-page textarea,
+.create-listing-page select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-listing-page textarea {
+    resize: vertical;
+}
+
+.create-listing-page button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-listing-page button:hover {
+    background-color: #0056b3;
+}

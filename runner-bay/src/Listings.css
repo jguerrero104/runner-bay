@@ -1,80 +1,22 @@
-.listings-h1 {
-  font-size: 50px;
+.listing-page {
   text-align: center;
-  font-weight: bold;
-  color: #0C2340;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 10px 20px 5px;
-  margin-bottom: 20px;
 }
 
-.listings-input-container {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.listings-form-container {
-  display: inline-block;
+.listings {
+  display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Input fields */
-.listings-input-container input[type="text"],
-.listings-input-container input[type="date"],
-.listings-input-container input[type="file"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-
-.listings-button[type="submit"] {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 40px;
-  cursor: pointer;
-}
-
-.listings-button[type="submit"]:hover {
-  background-color: #0056b3;
-}
-
-.listings-item-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
   gap: 20px;
 }
 
-.listings-item-card {
-  padding: 0px;
-  cursor: pointer;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-gap: 10px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 43px;
+.listing-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
 }
 
-.listings-item-card img {
+.listing-card img {
   width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.listings-item-card h2 {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.listings-item-card p {
-  margin-bottom: 5px;
-}
-
-.listings-comment-section {
-  margin-top: 20px;
+  border-radius: 8px;
 }

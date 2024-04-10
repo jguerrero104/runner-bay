@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from './Layout';
 import Listings from './Listings';
-//import News from './News';
+import CreateListing from './CreateListing';
 import { News } from './News';
 import About from './About'
 import LostAndFound from './LostAndFound';
@@ -23,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="listings" element={<Listings />} />
+          <Route path="create-listing" element={<CreateListing />} />
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />
           <Route path="lostandfound" element={<LostAndFound />} />

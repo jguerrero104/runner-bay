@@ -8,7 +8,7 @@ const authenticateToken = require('./authenticateToken');
 
 const setupAuthRoutes = (db) => {
   const router = express.Router();
-
+  
   // Apply some basic security measures
   router.use(helmet());
 
@@ -74,7 +74,7 @@ const setupAuthRoutes = (db) => {
       }
 
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      res.json({ token, id: user.id});
     } catch (error) {
       console.error('Login error:', error);
       res.status(500).json({ message: 'Login failed due to an internal error.' });
