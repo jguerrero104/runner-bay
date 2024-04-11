@@ -5,6 +5,7 @@ const express = require('express');
 const connectToDatabase = require('./database'); // Function to connect to your database
 const setupAuthRoutes = require('./authRoutes'); // Setup function from authRoutes.js
 const listingRoutes = require('./listingRoutes'); // Import the listing routes
+const profileRoutes = require('./profileRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -19,6 +20,7 @@ connectToDatabase()
   .then(db => {
     app.use('/', setupAuthRoutes(db)); // Use the router returned by setupAuthRoutes
     app.use('/', listingRoutes(db)); 
+    app.use('/', profileRoutes(db));
     
     // Listen for incoming requests
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
