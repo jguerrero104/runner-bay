@@ -7,6 +7,7 @@ import CreateListing from './CreateListing';
 import { News } from './News';
 import About from './About'
 import LostAndFound from './LostAndFound';
+import CreateLostItem from './CreateLostItem';
 import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
@@ -27,6 +28,7 @@ function App() {
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />
           <Route path="lostandfound" element={<LostAndFound />} />
+          <Route path="/create-lostAndFound" element={<CreateLostItem />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path ="login" element={<Login />} />
