@@ -58,11 +58,17 @@ const CreateListing = () => {
             if (response.ok) {
                 const newListing = await response.json();
                 console.log('Listing created:', newListing);
-                // Reset form or redirect to listings page
+                alert('Listing created successfully!');
+                setTitle('');
+                setDescription('');
+                setImage(null);
+                setCategory('');
+                setPrice('');
+
             } else {
                 const errorData = await response.json();
                 console.error('Error creating listing:', errorData.message);
-                // Display error message to the user
+                
             }            
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -124,6 +130,8 @@ const CreateListing = () => {
             </form>
         </div>
     );
+    } else {
+        return <div style={{ fontSize: '40px' }}>Please log in to report a lost or found item.</div>;
     }
 };
 

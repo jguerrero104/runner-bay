@@ -4,6 +4,7 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const express = require('express');
 const connectToDatabase = require('./database'); // Function to connect to your database
 const setupAuthRoutes = require('./authRoutes'); // Setup function from authRoutes.js
+const LostFoundRoutes = require('./LostFoundRoutes'); // Import the LostFound routes
 const listingRoutes = require('./listingRoutes'); // Import the listing routes
 const cors = require('cors');
 
@@ -19,6 +20,7 @@ connectToDatabase()
   .then(db => {
     app.use('/', setupAuthRoutes(db)); // Use the router returned by setupAuthRoutes
     app.use('/', listingRoutes(db)); 
+    app.use('/', LostFoundRoutes(db)); // Use the router returned by LostFoundRoutes
     
     // Listen for incoming requests
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
