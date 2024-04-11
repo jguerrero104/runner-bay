@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [id, setId] = useState(null); // Change from userID to id
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
       setId(parseInt(storedId, 10)); // Convert to integer
     }
-  }, []);
+  }, [token]);
 
   const login = async (email, password) => {
     try {
@@ -33,6 +34,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('id', String(id)); // Change from userID to id, convert to string
         setIsLoggedIn(true);
         setId(id); // Change from setUserID to setId
+        setToken(token);
         return { success: true };
       } else {
         const errorResponse = await handleErrorResponse(response);
@@ -46,9 +48,10 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('id'); // Change from userID to id
+    localStorage.removeItem('id');
     setIsLoggedIn(false);
-    setId(null); // Change from setUserID to setId
+    setId(null);
+    setToken(null); // Clear the token state
   };
 
   async function handleErrorResponse(response) {
@@ -62,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, id, login, logout }}> 
+    <AuthContext.Provider value={{ isLoggedIn, id, token, login, logout }}> 
       {children}
     </AuthContext.Provider>
   );

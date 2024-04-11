@@ -82,19 +82,19 @@ const setupAuthRoutes = (db) => {
   });
 
   // Protected route example: Get user profile
-  router.get('/api/user/profile', authenticateToken, async (req, res) => {
-    try {
-      const [user] = await db.query('SELECT username, email, role FROM users WHERE id = ?', [req.user.userId]);
-      if (user.length === 0) {
-        return res.status(404).json({ message: 'User not found.' });
-      }
+  // router.get('/api/user/profile', authenticateToken, async (req, res) => {
+  //   try {
+  //     const [user] = await db.query('SELECT username, email, role FROM users WHERE id = ?', [req.user.userId]);
+  //     if (user.length === 0) {
+  //       return res.status(404).json({ message: 'User not found.' });
+  //     }
 
-      res.json(user[0]);
-    } catch (error) {
-      console.error('Error accessing profile:', error);
-      res.status(500).json({ message: 'Failed to access user profile.' });
-    }
-  });
+  //     res.json(user[0]);
+  //   } catch (error) {
+  //     console.error('Error accessing profile:', error);
+  //     res.status(500).json({ message: 'Failed to access user profile.' });
+  //   }
+  // });
 
   return router;
 };
