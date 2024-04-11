@@ -1,101 +1,98 @@
 .top-news h1 {
-    font-size: 50px; /* Reduce font size for Top News */
-    text-align: left; /* Align the "Top News" text to the left */
+    font-size: 30px;
+    text-align: left;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
-    margin-bottom: 5px; /* Add bottom margin to separate from news feed */
+    margin: 10px 20px 5px;
+    margin-bottom: 5px;
 }
 
 .top-news .news-feed {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns for Top News */
-    grid-auto-rows: minmax(200px, auto); /* Set minimum row height to prevent text layering */
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(200px, auto);
     grid-gap: 30px;
 }
 
 .top-news .news-item {
-    padding: 0px;
+    padding: 0;
     cursor: pointer;
-    display: grid; /* Add this line to make each news item a grid container */
-    grid-template-rows: auto 1fr; /* Adjust row height as needed */
+    display: grid;
+    grid-template-rows: auto 1fr;
     grid-gap: 10px;
     position: relative;
-    overflow: hidden; /* Hide any overflow content */
-    border-radius: 35px; /* Add rounded corners */
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .top-news .news-item img {
     width: 105%;
-    height: 100%; /* Constrain image height to fill its container */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    height: 105%;
+    object-fit: cover;
 }
 
-
-.top-news .news-item h2, 
-.top-news .news-item p { /* Add this block */
+.top-news .news-item h2,
+.top-news .news-item p {
     position: absolute;
-    left: 10px; /* Adjust as needed */
-    bottom: 20px; /* Adjust as needed */
-    color: white; /* Text color */
+    left: 10px;
+    bottom: 20px;
+    color: white;
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
-    border-radius: 10px; /* Add rounded corners */
-    width: calc(100% - 20px); /* Subtract padding from width */
-    z-index: 1; /* Ensure text is above the image */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    width: calc(100% - 20px);
+    z-index: 1;
 }
-
-/* Update the CSS for Regular Articles */
 
 .regular-news {
     margin-top: 40px;
 }
 
 .regular-news h1 {
-    font-size: 50px; /* Reduce font size for Top News */
-    text-align: left; /* Align the "Top News" text to the left */
+    font-size: 30px;
+    text-align: left;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
-    margin-bottom: 10px; /* Add bottom margin to separate from news feed */
+    margin: 10px 20px 5px;
+    margin-bottom: 10px;
 }
 
 .regular-news .news-feed {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Adjust column width as needed */
-    grid-auto-rows: minmax(200px, auto); /* Set minimum row height to prevent text layering */
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
     grid-gap: 30px;
 }
 
 .regular-news .news-item {
-    padding: 0px;
+    padding: 0;
     cursor: pointer;
-    display: grid; /* Add this line to make each news item a grid container */
-    grid-template-rows: auto 1fr; /* Adjust row height as needed */
+    display: grid;
+    grid-template-rows: auto 1fr;
     grid-gap: 10px;
     position: relative;
-    overflow: hidden; /* Hide any overflow content */
-    border-radius: 35px; /* Add rounded corners */
+    overflow: hidden;
+    border-radius: 8px;
 }
+
 .regular-news .news-item h2,
 .regular-news .news-item p {
     position: absolute;
-    left: 10px; /* Adjust as needed */
-    bottom: 15px; /* Adjust as needed */
-    color: white; /* Text color */
+    left: 10px;
+    bottom: 15px;
+    color: white;
     margin: 0;
     padding: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
-    border-radius: 10px; /* Add rounded corners */
-    width: calc(100% - 20px); /* Subtract padding from width */
-    z-index: 1; /* Ensure text is above the image */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    width: calc(100% - 20px);
+    z-index: 1;
 }
 
-
 .regular-news .news-item img {
-    width: 100%;
-    height: 105%; /* Remove fixed height to maintain aspect ratio */
+    width: 105%;
+    height: 105%;
     object-fit: cover;
 }
 
@@ -104,4 +101,15 @@
     margin: 0;
 }
 
+.top-news .news-item:hover,
+.regular-news .news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.top-news .news-item:hover h2,
+.top-news .news-item:hover p,
+.regular-news .news-item:hover h2,
+.regular-news .news-item:hover p {
+    background-color: rgba(0, 0, 0, 0.7);
+}

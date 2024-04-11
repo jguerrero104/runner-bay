@@ -1,88 +1,66 @@
-.lostandfound-h1 {
-    font-size: 50px; /* Reduce font size for Top News */
-    text-align: center; /* Align the "Top News" text to the left */
-    font-weight: bold;
-    color: #0C2340;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 10px 20px 5px; /* Add margin: top 10px, right and left 20px, bottom 5px */
-    margin-bottom: 20px; /* Add bottom margin to separate from news feed */
-  }
-.lostandfound-input-container {
-    display: inline-block; /* Make the input containers sit next to each other */
-    margin-right: 10px;
-  }
-  
-  .lostandfound-form-container {
-    display: inline-block; /* Ensure the form container also behaves as inline-block */
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  /* Input fields */
-.lostandfound-input-container input[type="text"],
-.lostandfound-input-container input[type="date"],
-.lostandfound-input-container input[type="file"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
+.container {
+  margin-top: 40px;
+  padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.card h2 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-  /* Button */
-  .lostandfound-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .lostandfound-button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  
-  .lostandfound-custom-file-upload:hover {
-    background-color: #218838;
-  }
-  
-  .lostandfound-item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  /* Individual item card */
-  .lostandfound-item-card {
-    padding: 0px;
-    cursor: pointer;
-    display: grid; /* Add this line to make each news item a grid container */
-    grid-template-rows: auto 1fr; /* Adjust row height as needed */
-    grid-gap: 10px;
-    position: relative;
-    overflow: hidden; /* Hide any overflow content */
-    border-radius: 43px; /* Add rounded corners */
-  }
-  
-  /* Image inside the item card */
-  .lostandfound-item-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-  
-  /* Title */
-  .lostandfound-item-card h2 {
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  
-  /* Description */
-  .lostandfound-item-card p {
-    margin-bottom: 5px;
-  }
+.card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
 
-  .lostandfound-comment-section {
-    margin-top: 20px;
-  }
+.card-footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
+}
