@@ -23,7 +23,7 @@ const CreateLostItem = () => {
         formData.append('itemName', itemName);
         formData.append('description', description);
         formData.append('location', location);
-        formData.append('image_url', image_url);
+        formData.append('image', image_url);
         formData.append('reportDate', reportDate);
         formData.append('reporterId', id);
 
