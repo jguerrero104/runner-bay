@@ -6,7 +6,7 @@ const LostAndFoundCard = ({ lostAndFound }) => {
     const formattedImageUrl = image_url.replace(/\\/g, '/');
 
     return (
-        <div className="lost-found-card">
+        <div className="col-md-4 mb-4">
             <div className="card lostAndFound-card">
                 <img src={`http://localhost:3001/uploads/${formattedImageUrl}`} alt={itemName} />
                 <div className="card-body">
