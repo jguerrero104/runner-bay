@@ -7,6 +7,7 @@ import UserListings from './UserListings';
 import SavedListings from './SavedListings';
 import './assets/css/Profile.css';
 
+// Fetching user info
 const Profile = () => {
   const { token } = useAuth(); 
   const [user, setUser] = useState([]);
@@ -39,30 +40,27 @@ const Profile = () => {
     };
 
     fetchUserInfo();
-  }, [token]); // Dependency on token; if the token changes, refetch user info
-
-  const handleEditPicture = () => {
-    console.log('Edit picture clicked');
-  };
+  }, [token]); 
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
   };
 
+  // Selecting an option from the profile menu renders a new section on the right side of the profile page
   const renderSection = () => {
     switch (activeSection) {
       case 'account':
-        return user && <AccountInfo email={user.email} />;
+        return user && <AccountInfo email={user.email} phoneNumber={user.phone_number} firstName={user.user_fname} lastName={user.user_lname}/>;
       case 'listings':
         return <UserListings />;
       case 'saved':
         return <SavedListings onBack={() => setActiveSection('account')} />;
       default:
-        return user && <AccountInfo email={user.email} />;
+        return user && <AccountInfo email={user.email} phoneNumber={user.phone_number}/>;
     }
   };
 
-
+  // Profile Menu
   return (
     
     <Container fluid>
@@ -76,7 +74,7 @@ const Profile = () => {
                 <p className="profile-username">@{user.username}</p>
               </div>
             </div>
-            <Button onClick={handleEditPicture} className="edit-button">Edit Profile</Button>
+            
           </div>
           <ListGroup className="profile-listgroup mt-3">
             <ListGroup.Item
