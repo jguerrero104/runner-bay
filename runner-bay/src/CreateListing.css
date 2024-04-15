@@ -1,49 +1,80 @@
 .create-listing-page {
     max-width: 600px;
-    margin: auto;
+    margin: 0 auto; /* align center */
     padding: 20px;
+    background-color: #f9f9f9; /* corrected background color */
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #1e131300;
-}
-
-.create-listing-page h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.create-listing-page form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.create-listing-page label {
+  }
+  
+  .create-listing-page h1 {
+    font-size: 24px; /* match font size */
     font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .create-listing-page label {
+    display: block;
+    font-size: 16px; /* match font size */
     margin-bottom: 5px;
-}
-
-.create-listing-page input[type="text"],
-.create-listing-page textarea,
-.create-listing-page select {
+  }
+  
+  .create-listing-page input[type="text"],
+  .create-listing-page textarea,
+  .create-listing-page select {
+    width: 100%; /* ensure full width */
     padding: 10px;
+    margin-bottom: 20px; /* uniform margin */
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.create-listing-page textarea {
+  }
+  
+  .create-listing-page textarea {
     resize: vertical;
-}
-
-.create-listing-page button {
+  }
+  
+  .create-listing-page input[type="file"] { /* assuming file input similarity */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .create-listing-page input[type="date"] { /* assuming date input similarity */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .create-listing-page button {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
+    font-size: 16px; /* match font size */
     cursor: pointer;
-}
-
-.create-listing-page button:hover {
-    background-color: #0056b3;
-}
+    transition: background-color 0.3s ease; /* added transition for consistency */
+  }
+  
+  .create-listing-page button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Added margin to the top of the button */
+  }
+  
+  
+  .create-listing-page .error-message {
+    color: red;
+    font-size: 14px; /* consistent error message style */
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,19 @@
+.layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .layout-content {
+    flex: 1;
+  }
+  
+  .App-footer {
+    text-align: center;
+    padding: 10px 0; /* Reduced padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+    background-color: rgba(255, 120, 16, 0);
+    color: white;
+  }
+  
+  

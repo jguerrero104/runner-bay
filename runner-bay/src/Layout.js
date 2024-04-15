@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import './Layout.css';
 
 const Layout = ({children}) => {
   const { isLoggedIn, logout } = useAuth(); // Use logout from AuthContext
@@ -16,7 +17,7 @@ const Layout = ({children}) => {
   };
 
   return (
-    <>
+    <div className="layout-wrapper">
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand as={Link} to="/">RunnerBay</Navbar.Brand>
         <Nav className="mr-auto">
@@ -44,10 +45,10 @@ const Layout = ({children}) => {
         </Nav>
       </Navbar>
       {children}
-      <footer className="App-footer" style={{backgroundColor:'#343a40', color: 'white'}}>
+      <footer className="App-footer">
         <p>© 2024 RunnerBay for UTSA Students</p>
       </footer>
-    </>
+    </div>
   );
 }
 

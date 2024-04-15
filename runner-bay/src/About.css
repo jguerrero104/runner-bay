@@ -1,0 +1,42 @@
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: rgb(33 37 41);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif; 
+    font-weight: 300;
+  }
+
+  .about-content {
+    padding: 40px; /* Or any other value you prefer */
+    background-color: #f0f0f0; /* Light grey for the about content background, change as needed */
+    border-radius: 10px; /* Optional, if you want rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.241); /* Optional, for a slight shadow effect */
+    margin: auto; /* Centers the content */
+    max-width: 800px; /* Or any other max-width or width you prefer */
+  }
+  
+  .logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .team-credits h2 {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  
+  .team-credits ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .team-credits li {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
