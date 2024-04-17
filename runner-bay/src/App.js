@@ -13,6 +13,7 @@ import Profile from './Profile';
 import Settings from './Settings';
 import Login from './Login';
 import Register from './Register';
+import ListingDetail from './ListingDetail';
 import { AuthProvider } from './AuthContext';
 
 
@@ -22,8 +23,9 @@ function App() {
     <Router> 
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="" element={<Home />} />
           <Route path="listings" element={<Listings />} />
+          <Route path="listings/:listingId" element={<ListingDetail />} /> 
           <Route path="create-listing" element={<CreateListing />} />
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />

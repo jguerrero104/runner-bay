@@ -7,6 +7,7 @@ const CreateListing = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
     const [category, setCategory] = useState('');
+    const [location, setLocation] = useState('');  // Add location
     const [price, setPrice] = useState('');
     const [categories, setCategories] = useState([]);
     const {isLoggedIn, id } = useAuth();
@@ -42,6 +43,7 @@ const CreateListing = () => {
         formData.append('description', description);
         formData.append('image', image);
         formData.append('category', category);
+        formData.append('location', location);  // Add location
         formData.append('price', price);
         formData.append('sellerId', id);
 
@@ -117,6 +119,17 @@ const CreateListing = () => {
                         ))}
                     </select>
 
+                </div>
+                <div>
+                    <label>Location</label>
+                    <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                        <option value="">Select a location</option>
+                        <option value="Main Campus">Main Campus</option>
+                        <option value="Downtown Campus">Downtown Campus</option>
+                        <option value="Southwest Campus">Southwest Campus</option>
+                        <option value="Hemisfair Campus">Hemisfair Campus</option>
+                        <option value="Park West Campus">Park West Campus</option>
+                    </select>
                 </div>
                 <div>
                     <label>Price</label>

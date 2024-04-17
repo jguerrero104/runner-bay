@@ -17,7 +17,7 @@ const Login = () => {
 
     const result = await login(email, password);
     if (result.success) {
-      navigate("/home");
+      navigate("/");
     } else {
       setError(result.message); // Set the error message to be displayed
       // Do not navigate away from the login page

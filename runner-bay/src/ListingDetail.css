@@ -1,0 +1,59 @@
+
+/* ListingDetail.css */
+
+.listing-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff; /* fallback color */
+    background-image: linear-gradient(to top, #e6f0ff, #ffffff 50%);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+
+.listing-detail-image {
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+}
+
+.listing-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.listing-detail-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.listing-detail-price {
+    font-size: 20px;
+    color: #007BFF; /* Bootstrap primary color */
+    font-weight: bold;
+}
+
+.listing-detail-info {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #666;
+}
+
+.listing-detail-description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.listing-detail-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888;
+    text-align: right;
+}
+
+/* Add more styles as needed */
