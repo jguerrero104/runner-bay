@@ -6,13 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import './Layout.css';
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   const { isLoggedIn, logout } = useAuth(); // Use logout from AuthContext
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout(); // Call logout from AuthContext
-    // Redirect to homepage or login page after logout
     navigate('/login');
   };
 
@@ -21,7 +20,17 @@ const Layout = ({children}) => {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand as={Link} to="/">RunnerBay</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/listings">Listings</Nav.Link>
+          {/* Marketplace Dropdown */}
+          <Dropdown>
+            <Dropdown.Toggle variant="dark" id="marketplace-dropdown">
+              Marketplace
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark">
+              <Dropdown.Item as={Link} to="/listings">Listings</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/requests">Requests</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <Nav.Link as={Link} to="/news">News</Nav.Link>
           <Nav.Link as={Link} to="/lostandfound">Lost & Found</Nav.Link>
           <Nav.Link as={Link} to="/about">About</Nav.Link>
@@ -30,13 +39,13 @@ const Layout = ({children}) => {
         <Nav>
           {isLoggedIn ? (
             <Dropdown>
-              <Dropdown.Toggle variant="dark">
+              <Dropdown.Toggle variant="dark" id="profile-dropdown">
                 Profile
               </Dropdown.Toggle>
               <Dropdown.Menu variant="dark">
                 <Dropdown.Item as={Link} to="/profile">View Profile</Dropdown.Item>
                 <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
-                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item> {/* Removed the Link to /logout */}
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
