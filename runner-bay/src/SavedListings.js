@@ -1,38 +1,64 @@
-import React from 'react';
-import './assets/css/Profile.css';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import ListingCard from './ListingCard'; 
 
-function SavedListings({ onBack }) {
-  const fakeListings = [
-    { id: 1, title: 'Fujifilm Digital Camera', description: 'Fujifilm FinePix J38 Digital Camera' },
-    { id: 2, title: 'Compact Mini Fridge', description: 'Like-new mini fridge perfect for dorms. ' },
-    { id: 3, title: 'TI-84 Plus Calculator', description: 'Pre-owned graphing calculator' },
-    { id: 4, title: 'UTSA T-Shirt', description: "Size M UTSA t-shirt"},
-  ];
+function SavedListings({ userId }) {
+    const [listings, setListings] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); 
 
-  return (
-    <Container>
-      <Row className="mb-4">
-        <Col>
-          <h2 className="text-center">Your Saved Listings</h2>
-        </Col>
-      </Row>
-      <Row xs={1} md={3} className="g-4">
-        {fakeListings.map(listing => (
-          <Col key={listing.id} className="d-flex align-items-stretch">
-            <Card className="custom-card h-100">
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>{listing.title}</Card.Title>
-                <Card.Text>{listing.description}</Card.Text>
-                <Button variant="primary">View Details</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
-  );
+    useEffect(() => {
+        const fetchLikedListings = async () => {
+            const token = localStorage.getItem('token');
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+
+            try {
+                const response = await fetch('http://localhost:3001/profile/likes', { headers });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch');
+                }
+                const data = await response.json();
+                setListings(data);
+            } catch (error) {
+                console.error('Error fetching saved listings:', error);
+            } finally {
+                setIsLoading(false); 
+            }
+        };
+
+        fetchLikedListings();
+    }, [userId]);
+
+    return (
+        <Container>
+            <Row className="mb-4">
+                <Col>
+                    <h2 className="text-center">Your Listings</h2>
+                </Col>
+            </Row>
+            {isLoading ? (
+                // Display loading message while fetching data
+                <Row>
+                    <Col md={12}>
+                        <h4 className="text-center">Loading...</h4>
+                    </Col>
+                </Row>
+            ) : (
+                <Row xs={1} md={3} className="g-4">
+                    {listings.length > 0 ? (
+                        listings.map(listing => (
+                            <ListingCard key={listing.listingId} listing={listing} />
+                        ))
+                    ) : (
+                        <Col md={12}>
+                            <h4 className="text-center">No saved listings yet...</h4>
+                        </Col>
+                    )}
+                </Row>
+            )}
+        </Container>
+    );
 }
 
 export default SavedListings;

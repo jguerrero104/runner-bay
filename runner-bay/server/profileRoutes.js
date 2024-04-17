@@ -56,6 +56,57 @@ module.exports = function(db) {
         }
     });
 
+    // Route to get user's listings
+    router.get('/profile/listings', authenticateToken, async (req, res) => {
+        const userId = req.user.userId; 
+        console.log("UserID from token:", userId);
+    
+        const query = `
+            SELECT listingId, sellerId, categoryId, title, price, description, postDate, status, image_url
+            FROM listings
+            WHERE sellerId = ?;
+        `;
+    
+        try {
+            const [rows] = await db.query(query, [userId]);
+            if (rows.length > 0) {
+                res.json(rows);
+            } else {
+                res.status(404).send('No listings found');
+            }
+        } catch (error) {
+            console.error('Error fetching user listings:', error);
+            res.status(500).send('Failed to fetch user listings');
+        }
+    });
+    
+
+    // Route to get user's liked listings
+    router.get('/profile/likes', authenticateToken, async (req, res) => {
+        const userId = req.user.userId; 
+        console.log("UserID from token:", userId);
+    
+        const query = `
+            SELECT l.title, l.price, l.description, l.postDate, l.image_url
+            FROM likes lk
+            JOIN listings l ON lk.listing_id = l.listingId
+            WHERE lk.user_id = ?;
+        `;
+    
+        try {
+            const [rows] = await db.query(query, [userId]);
+            if (rows.length > 0) {
+                res.json(rows);
+            } else {
+                res.status(404).send('No liked listings found');
+            }
+        } catch (error) {
+            console.error('Error fetching liked listings:', error);
+            res.status(500).send('Failed to fetch liked listings');
+        }
+    });
+    
+
 
     return router;
 };
