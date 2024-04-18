@@ -56,4 +56,31 @@
     text-align: right;
 }
 
+.btn-custom {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No borders */
+    padding: 10px 20px; /* Padding inside the button */
+    margin: 5px; /* Margin around the button */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.btn-custom:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
+.btn-danger-custom {
+    background-color: #f44336; /* Red background for danger button */
+}
+
+.btn-warning-custom {
+    background-color: #ffeb3b; /* Yellow background for warning button */
+    color: #000; /* Black text for better contrast */
+}
+
+.btn-info-custom {
+    background-color: #2196F3; /* Blue background for info button */
+}
+
 /* Add more styles as needed */

@@ -3,6 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const router = express.Router();
+const authenticateToken = require('./authenticateToken');
+
 
 
 
@@ -97,25 +99,69 @@ router.post('/listings', upload.single('image'), async (req, res) => {
     }
 });
 
-
-//Delete a listing
-router.delete('/listings/:listingId', async (req, res) => {
+// Route to like a listing
+router.post('/listings/:listingId/like', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
     const { listingId } = req.params;
 
     try {
-        const sql = 'DELETE FROM listings WHERE listingId = ?';
-        const [result] = await db.query(sql, [listingId]);
-
-        if (result.affectedRows > 0) {
-            res.json({ message: 'Listing deleted successfully' });
+        const [existingLike] = await db.query('SELECT like_id FROM likes WHERE user_id = ? AND listing_id = ?', [userId, listingId]);
+        if (existingLike.length > 0) {
+            await db.query('DELETE FROM likes WHERE like_id = ?', [existingLike[0].like_id]);
+            res.json({ message: 'Listing unliked successfully', liked: false });
         } else {
-            res.status(404).json({ message: 'Listing not found' });
+            await db.query('INSERT INTO likes (user_id, listing_id) VALUES (?, ?)', [userId, listingId]);
+            res.json({ message: 'Listing liked successfully', liked: true });
         }
+    } catch (error) {
+        
+        console.error('Error toggling like status:', error);
+        res.status(500).json({ message: 'Failed to toggle like status' });
+    }
+});
+
+// Route to check if a listing is liked
+router.get('/listings/:listingId/is-liked', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;  
+    const { listingId } = req.params;
+
+    try {
+        const [result] = await db.query('SELECT like_id FROM likes WHERE user_id = ? AND listing_id = ?', [userId, listingId]);
+        if (result.length > 0) {
+            res.json({ liked: true });
+        } else {
+            res.json({ liked: false });
+        }
+    } catch (error) {
+        console.error('Error checking like status:', error);
+        res.status(500).json({ message: 'Failed to check like status' });
+    }
+});
+
+
+//Delete a listing
+router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
+    const { listingId } = req.params;
+    const userId = req.user.userId; 
+
+    try {
+        const [listing] = await db.query('SELECT sellerId FROM listings WHERE listingId = ?', [listingId]);
+        if (listing.length === 0) {
+            return res.status(404).json({ message: 'Listing not found' });
+        }
+
+        if (listing[0].sellerId !== userId) {
+            return res.status(403).json({ message: 'Unauthorized to delete this listing' });
+        }
+
+        await db.query('DELETE FROM listings WHERE listingId = ?', [listingId]);
+        res.json({ message: 'Listing deleted successfully' });
     } catch (error) {
         console.error('Error deleting listing:', error);
         res.status(500).json({ message: 'Failed to delete listing' });
     }
 });
+
 
 
 // Route to get all categories
