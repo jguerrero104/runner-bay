@@ -34,7 +34,7 @@ function SavedListings({ userId }) {
         <Container>
             <Row className="mb-4">
                 <Col>
-                    <h2 className="text-center">Your Listings</h2>
+                    <h2 className="text-center">Saved Listings</h2>
                 </Col>
             </Row>
             {isLoading ? (
