@@ -87,7 +87,7 @@ module.exports = function(db) {
         console.log("UserID from token:", userId);
     
         const query = `
-            SELECT l.title, l.price, l.description, l.postDate, l.image_url
+            SELECT l.listingId, l.title, l.price, l.description, l.postDate, l.image_url
             FROM likes lk
             JOIN listings l ON lk.listing_id = l.listingId
             WHERE lk.user_id = ?;
