@@ -35,6 +35,26 @@ module.exports = function(db) {
         }
     });
 
+    // Route to get a specific lost and found item
+    
+    router.get('/lostAndFounds/:itemId', async (req, res) => {
+        const { itemId } = req.params;
+        console.log('Received request for lost item with ID:', itemId); // Log the received item ID
+        try {
+            const [rows] = await db.query('SELECT * FROM lostandfound WHERE itemId = ?', [itemId]);
+            if (rows.length === 0) {
+                console.error('Lost item not found for ID:', itemId); // Log if the item is not found
+                return res.status(404).json({ message: 'Lost item not found' });
+            } else {
+                res.json(rows[0]);
+            }
+        } catch (error) {
+            console.error('Error fetching lost item:', error); // Log database query errors
+            res.status(500).json({ message: 'Failed to fetch lost item' });
+        }
+    });
+    
+
     // Route to add a new listing
 
     router.post('/lostAndFounds', upload.single('image'), async (req, res) => {

@@ -28,7 +28,7 @@ const LostAndFound = () => {
           </div>
           <div className="row">
               {lostAndFounds.map(lostAndFound => (
-                  <LostAndFoundCard key={lostAndFound.lostAndFoundId} lostAndFound={lostAndFound} />
+                  <LostAndFoundCard key={lostAndFound.itemId} lostAndFound={lostAndFound} />
               ))}
           </div>
       </div>
