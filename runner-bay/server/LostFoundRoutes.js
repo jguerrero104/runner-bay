@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const router = express.Router();
+const authenticateToken = require('./authenticateToken');
 
 const uploadsDir = path.join(__dirname, '..', 'uploads');
 if (!fs.existsSync(uploadsDir)) {
@@ -53,8 +54,34 @@ module.exports = function(db) {
             res.status(500).json({ message: 'Failed to fetch lost item' });
         }
     });
-    
 
+    // Route to contact the owner of a lost item
+    router.post('/lostAndFounds/:itemId/contact', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const { itemId } = req.params;
+    const { message } = req.body;
+
+    try {
+        // Check if there's already a pending request for this user and item
+        const [existingRequest] = await db.query('SELECT lostrequest_id FROM lostrequest WHERE lost_item_id = ? AND request_id = ?', [itemId, userId]);
+        if (existingRequest.length > 0) {
+            return res.status(400).json({ message: 'There is already a pending contact request for this item.' });
+        }
+
+        // Insert a new request into the lostrequest table
+        await db.query('INSERT INTO lostrequest (lost_item_id, request_id) VALUES (?, ?)', [itemId, userId]);
+
+        // Respond with success message
+        res.status(201).json({ message: 'Contact request sent successfully.' });
+    } catch (error) {
+        console.error('Error sending contact request:', error);
+        // Respond with an error message
+        res.status(500).json({ message: 'Failed to send contact request. Please try again later.' });
+    }
+});
+
+    
+    
     // Route to add a new listing
 
     router.post('/lostAndFounds', upload.single('image'), async (req, res) => {
@@ -80,7 +107,6 @@ module.exports = function(db) {
             res.status(500).json({ message: 'Failed to create lost item', error: error.message });
         }
     });
-    
 
     return router;
 }
