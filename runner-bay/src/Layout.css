@@ -1,7 +1,9 @@
 /* Layout.css */
 
 .layout-wrapper {
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Navbar */
@@ -50,14 +52,22 @@
   background-color: #de880f; /* Lighter grey on hover */
 }
 
-/* Footer */
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+}
+
 .App-footer {
-  background-color: #f8f9fa; /* Light grey background */
-  border-top: 1px solid #dcdcdc; /* Light border */
-  padding: 15px 20px;
   text-align: center;
-  font-size: 14px;
-  color: #333; /* Dark grey */
+  padding: 10px 0; /* Reduced padding */
+  font-size: 0.9em; /* Slightly smaller font size */
+  background-color: rgba(255, 120, 16, 0);
+  color: rgb(0, 0, 0);
 }
 
 /* Responsive */

@@ -15,6 +15,7 @@ import Settings from './Settings';
 import Login from './Login';
 import Register from './Register';
 import ListingDetail from './ListingDetail';
+import Requests from './Requests';
 import { AuthProvider } from './AuthContext';
 
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="" element={<Home />} />
           <Route path="listings" element={<Listings />} />
+          <Route path ="requests" element={<Requests />} /> 
           <Route path="listings/:listingId" element={<ListingDetail />} /> 
           <Route path="create-listing" element={<CreateListing />} />
           <Route path="news" element={<News />} />

@@ -5,12 +5,13 @@ import { useAuth } from './AuthContext';
 
 
 const ListingDetail = () => {
-  const {id: userId, token} = useAuth();
+  const {id: userId, token, role} = useAuth();
   const [listing, setListing] = useState(null);
   const [liked, setLiked] = useState(null);  // State to track like status
   const [error, setError] = useState(null);
   const { listingId } = useParams();
   const [isOwner, setIsOwner] = useState(false);
+  const isAdmin = role === 'admin';  // Determine if the user is an admin
   console.log("Listing ID from URL:", listingId);
 
   useEffect(() => {
@@ -79,6 +80,26 @@ const ListingDetail = () => {
     }
 };
 
+const contactSeller = async () => {
+  try {
+      const response = await fetch(`http://localhost:3001/listings/${listingId}/contact`, {
+          method: 'POST',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: 'Hi, I am interested in your listing. Can we exchange contact details?' }) // Customize message as needed
+      });
+      if (!response.ok) throw new Error('Failed to send contact request.');
+      const data = await response.json();
+      alert(data.message); // Show success message
+  } catch (error) {
+      console.error('Error contacting seller:', error);
+      alert('Failed to contact seller. Please try again later.');
+  }
+};
+
+
 
 
   if (error) {
@@ -100,11 +121,11 @@ const ListingDetail = () => {
                 <p className="card-text listing-detail-info"><strong>Location:</strong> {listing.location}</p>
                 <p className="card-text listing-detail-description">{listing.description}</p>
                 <div className="d-flex justify-content-between mt-4">
-                <button className="btn btn-custom btn-info-custom">Contact Seller</button>
+                <button className="btn btn-custom btn-info-custom" onClick={contactSeller}>Contact Seller</button>
                 <button onClick={toggleLike} className={`btn btn-custom ${liked ? 'btn-success' : 'btn-outline-success-custom'}`}>{liked ? 'Unlike' : 'Like'}</button>
                 <button className="btn btn-custom btn-danger-custom">Report Listing</button>
                 <button className="btn btn-custom btn-warning-custom">Report User</button>
-                {isOwner && <button onClick={deleteListing} className="btn btn-custom btn-danger-custom">Delete Listing</button>}
+                { (isOwner || isAdmin) && <button onClick={deleteListing} className="btn btn-danger">Delete Listing</button> }
                 </div>
             </div>
             <div className="card-footer listing-detail-footer">

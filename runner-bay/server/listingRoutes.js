@@ -42,7 +42,7 @@ router.get('/listings', async (req, res) => {
 // Express route to handle requests for a single listing by ID
 router.get('/listings/:listingId', async (req, res) => {
     const { listingId } = req.params;
-    console.log("Fetching listing with ID:", listingId);  
+    
     try {
         
         const [rows] = await db.query('SELECT * FROM listings WHERE listingId = ?', [listingId]);
@@ -142,7 +142,7 @@ router.get('/listings/:listingId/is-liked', authenticateToken, async (req, res) 
 router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
     const { listingId } = req.params;
     const userId = req.user.userId; 
-    const userRole = req.user.role;  
+    const userRole = req.user.role;
 
     try {
         const [listing] = await db.query('SELECT sellerId FROM listings WHERE listingId = ?', [listingId]);
@@ -150,7 +150,7 @@ router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
             return res.status(404).json({ message: 'Listing not found' });
         }
 
-        // Allow deletion if the user is the seller or an admin
+        // Check if the user is the owner or an admin
         if (listing[0].sellerId !== userId && userRole !== 'admin') {
             return res.status(403).json({ message: 'Unauthorized to delete this listing' });
         }
@@ -162,6 +162,59 @@ router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Failed to delete listing' });
     }
 });
+
+// Route to contact the owner of a listing
+router.post('/listings/:listingId/contact', authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const { listingId } = req.params;
+    const { message } = req.body;  // Assuming you want to send a message with the contact request
+
+    try {
+        // Check if there's already a pending request for this user and listing
+        const [existingRequest] = await db.query('SELECT request_id FROM requests WHERE listing_id = ? AND user_id = ? AND status = "pending"', [listingId, userId]);
+        if (existingRequest.length > 0) {
+            return res.status(400).json({ message: 'There is already a pending contact request for this listing.' });
+        }
+
+        // Insert a new request into the requests table
+        await db.query('INSERT INTO requests (user_id, listing_id, status, message) VALUES (?, ?, "pending", ?)', [userId, listingId, message]);
+
+        // Respond with success message
+        res.status(201).json({ message: 'Contact request sent successfully.' });
+    } catch (error) {
+        console.error('Error sending contact request:', error);
+        res.status(500).json({ message: 'Failed to send contact request. Please try again later.' });
+    }
+});
+
+
+
+// Route to get all contact requests for a seller
+router.get('/requests', authenticateToken, async (req, res) => {
+    const sellerId = req.user.userId;
+    
+    try {
+        const query = `
+        SELECT r.request_id, r.user_id, r.listing_id, r.status, r.created_at, u.username as buyer_username, l.title as listing_title
+        FROM requests r
+        JOIN listings l ON r.listing_id = l.listingId
+        JOIN users u ON r.user_id = u.id
+        WHERE l.sellerId = ? AND r.status = 'pending';
+        `;
+        const [rows] = await db.query(query, [sellerId]);
+        if (rows.length > 0) {
+            res.json(rows);
+        } else {
+            res.status(404).json({ message: 'No contact requests found.' });
+        }
+    } catch (error) {
+        console.error('Error fetching contact requests:', error);
+        res.status(500).json({ message: 'Failed to fetch contact requests.' });
+    }
+});
+
+
+
 
 
 

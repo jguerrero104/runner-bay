@@ -58,28 +58,29 @@ const setupAuthRoutes = (db) => {
   router.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required.' });
+        return res.status(400).json({ message: 'Email and password are required.' });
     }
 
     try {
-      const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-      if (users.length === 0) {
-        return res.status(401).json({ message: 'Invalid email or password.' });
-      }
+        const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+        if (users.length === 0) {
+            return res.status(401).json({ message: 'Invalid email or password.' });
+        }
 
-      const user = users[0];
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return res.status(401).json({ message: 'Invalid email or password.' });
-      }
+        const user = users[0];
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            return res.status(401).json({ message: 'Invalid email or password.' });
+        }
 
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token, id: user.id});
+        const token = jwt.sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token, id: user.id, role: user.role });  // Include role in the response
     } catch (error) {
-      console.error('Login error:', error);
-      res.status(500).json({ message: 'Login failed due to an internal error.' });
+        console.error('Login error:', error);
+        res.status(500).json({ message: 'Login failed due to an internal error.' });
     }
-  });
+});
+
 
   // Protected route example: Get user profile
   // router.get('/api/user/profile', authenticateToken, async (req, res) => {
