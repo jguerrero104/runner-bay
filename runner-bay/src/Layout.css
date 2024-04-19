@@ -1,19 +1,73 @@
+/* Layout.css */
+
 .layout-wrapper {
-    display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1f6fc0; /* Light grey background */
+  border-bottom: 1px solid #dcdcdc; /* Light border */
+  padding: 15px 20px;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e7880c; /* Dark grey */
+  text-decoration: none;
+}
+
+.nav-link {
+  font-size: 16px;
+  color: #ffffff; /* Dark grey */
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.nav-link:hover {
+  color: #de880f; /* Blue on hover */
+}
+
+/* Dropdown */
+.dropdown-toggle {
+  font-size: 16px;
+  color: #ffffff; /* Dark grey */
+}
+
+.dropdown-menu {
+  background-color: #f8f9fa; /* Light grey background */
+  border: none;
+}
+
+.dropdown-item {
+  font-size: 16px;
+  color: #333; /* Dark grey */
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: #de880f; /* Lighter grey on hover */
+}
+
+/* Footer */
+.App-footer {
+  background-color: #f8f9fa; /* Light grey background */
+  border-top: 1px solid #dcdcdc; /* Light border */
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #333; /* Dark grey */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-nav {
     flex-direction: column;
-    min-height: 100vh;
   }
   
-  .layout-content {
-    flex: 1;
+  .nav-link,
+  .dropdown-toggle {
+    margin: 10px 0;
   }
-  
-  .App-footer {
-    text-align: center;
-    padding: 10px 0; /* Reduced padding */
-    font-size: 0.9em; /* Slightly smaller font size */
-    background-color: rgba(255, 120, 16, 0);
-    color: white;
-  }
-  
-  
+}
