@@ -1,0 +1,46 @@
+/* LostAndFoundDetails.module.css */
+
+.lost-and-found-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    background-image: linear-gradient(to top, #e6f0ff, #ffffff 50%);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.lost-and-found-detail-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.lost-and-found-detail-body {
+    margin-top: 20px;
+}
+
+.lost-and-found-detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.lost-and-found-detail-info {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #666666;
+}
+
+.lost-and-found-detail-description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555555;
+}
+
+.lost-and-found-detail-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #888888;
+}
