@@ -1,4 +1,3 @@
- // Ensure this is at the top to load environment variables first
 require('dotenv').config();
 console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const express = require('express');

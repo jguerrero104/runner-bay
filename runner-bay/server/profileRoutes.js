@@ -6,7 +6,7 @@ const router = express.Router();
 require('dotenv').config();
 
 
-const authenticateToken = require('./authenticateToken');
+const { authenticateToken } = require('./authenticateToken');
 
 module.exports = function(db) {
     const router = express.Router();

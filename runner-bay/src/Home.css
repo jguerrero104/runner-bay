@@ -1,47 +1,101 @@
+
+
 .home-news-slider {
-    height: 890px; /* Set a fixed height for the slider */
+    height: 250px; /* Set a fixed height for the slider */
     overflow: hidden; /* Hide overflow content */
+    margin-bottom: 150px;
 }
 
 .home-news-item {
-    padding: 0px;
+    padding: 0;
     height: 230px; /* Set height to your desired value */
     cursor: pointer;
     margin-top: 10px; /* Adjust margin as needed */
-    display: grid; /* Add this line to make each news item a grid container */
-    grid-template-rows: auto 1fr; /* Adjust row height as needed */
-    grid-gap: 10px;
+    display: grid; /* Use grid layout */
+    grid-template-rows: auto 1fr; /* Define row sizes */
+    grid-gap: 10px; /* Space between grid items */
     position: relative;
     overflow: hidden; /* Hide any overflow content */
-    border-radius: 30px; /* Add rounded corners */
+    border-radius: 20px; /* Rounded corners */
+    transition: transform 0.3s ease-in-out; /* Smooth transform on hover */
 }
 
 .home-news-item:hover {
-    background-color: #f0f0f0;
+    transform: scale(1.05); /* Slightly increase size on hover */
+    background-color: #f0f0f0; /* Background color change on hover */
 }
+
 .home-news-item img {
-    width: 100%; /* Ensure the image spans the full width of its container */
-    height: 105%; /* Allow the image to adjust its height proportionally */
-    object-fit: cover; /* Ensure the image covers the container without stretching */
-  }
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Cover fit to avoid stretching */
+}
 
 .home-news-item h2 {
     position: absolute;
-    left: 10px; /* Adjust as needed */
-    bottom: 10px; /* Adjust as needed */
-    color: white; /* Text color */
+    left: 10px;
+    bottom: 10px;
+    color: white;
     margin: 0;
-    padding: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
-    border-radius: 10px; /* Add rounded corners */
-    width: calc(100% - 20px); /* Subtract padding from width */
-    z-index: 1; /* Ensure text is above the image */
+    padding: 5px 10px; /* Padding around text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    border-radius: 10px;
+    width: calc(100% - 20px); /* Full width minus padding */
+    z-index: 1;
 }
 
 .runnerbay-header {
-    font-size: 50px; /* Adjust font size */
-    font-weight: bold; /* Make the font bold */
-    color: white; /* Text color */
-    text-align: center; /* Align the text to the center */
-    margin-top: 20px; /* Adjust margin as needed */
+    font-size: 50px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px; /* Space before the content starts */
+}
+
+/* Listings Slider Styles */
+.home-listings-slider {
+    padding: 20px 0;  /* Keeps some padding around the slider */
+}
+
+.home-listing-item {
+    width: 300px; /* Increase width */
+    margin: 0 15px; /* Increase margin for more space between items */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.home-listing-item img {
+    width: 500px; /* Full width of the container */
+    height: 500px; /* Increase height */
+    object-fit: cover; /* Ensures the image covers the area without being stretched */
+}
+
+.home-listing-item h2 {
+    margin: 10px 0;
+    font-size: 20px; /* Increase font size for better visibility */
+    color: #333;
+}
+
+.home-listing-item p {
+    font-size: 18px; /* Increase font size for price */
+    color: #007bff; /* Bootstrap primary color */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .home-listing-item {
+        width: 90%; /* Adjust width to be responsive */
+        height: auto; /* Ensure the height adjusts according to the width */
+    }
+    .home-listing-item img {
+        height: auto;
+    }
 }

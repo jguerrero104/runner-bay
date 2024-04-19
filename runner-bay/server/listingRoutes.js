@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const router = express.Router();
-const authenticateToken = require('./authenticateToken');
+const {authenticateToken, isAdmin} = require('./authenticateToken');
 
 
 
@@ -138,11 +138,11 @@ router.get('/listings/:listingId/is-liked', authenticateToken, async (req, res) 
     }
 });
 
-
-//Delete a listing
+// Consolidated delete route
 router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
     const { listingId } = req.params;
     const userId = req.user.userId; 
+    const userRole = req.user.role;  
 
     try {
         const [listing] = await db.query('SELECT sellerId FROM listings WHERE listingId = ?', [listingId]);
@@ -150,7 +150,8 @@ router.delete('/listings/:listingId', authenticateToken, async (req, res) => {
             return res.status(404).json({ message: 'Listing not found' });
         }
 
-        if (listing[0].sellerId !== userId) {
+        // Allow deletion if the user is the seller or an admin
+        if (listing[0].sellerId !== userId && userRole !== 'admin') {
             return res.status(403).json({ message: 'Unauthorized to delete this listing' });
         }
 
