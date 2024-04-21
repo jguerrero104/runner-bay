@@ -1,0 +1,58 @@
+/* Requests.css */
+.requests-container {
+    max-width: 800px; /* Adjust based on your design needs */
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.request-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    grid-gap: 10px; /* Spacing between grid items */
+}
+
+.request-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.request-message {
+    max-width: 100%; /* Ensures the div does not extend beyond its container */
+    word-wrap: break-word; /* Breaks long words to ensure they don't overflow */
+    overflow-wrap: break-word; /* Prevents overflow */
+    overflow-y: auto; /* Adds a scrollbar if the content overflows vertically */
+    height: auto; /* Adjust this to fit your design, you might set a max-height */
+    margin-bottom: 10px; /* Space below the message container */
+}
+
+.request-item {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+}
+
+.request-action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.request-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .requests-container {
+        grid-template-columns: 1fr; /* Adjust based on mobile view */
+    }
+}
