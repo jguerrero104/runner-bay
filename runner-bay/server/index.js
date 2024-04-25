@@ -7,6 +7,7 @@ const LostFoundRoutes = require('./LostFoundRoutes'); // Import the LostFound ro
 const listingRoutes = require('./listingRoutes'); // Import the listing routes
 const profileRoutes = require('./profileRoutes');
 const requestRoutes = require('./requestRoutes');
+const LostRequestRoutes = require('./LostRequestRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -24,6 +25,7 @@ connectToDatabase()
     app.use('/', profileRoutes(db)); // Include profile routes
     app.use('/', LostFoundRoutes(db)); // Include LostFound routes
     app.use('/', requestRoutes(db)); // Include request routes
+    app.use('/', LostRequestRoutes(db)); // Include LostRequests routes
     
     // Listen for incoming requests
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

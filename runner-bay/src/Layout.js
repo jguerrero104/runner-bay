@@ -32,7 +32,18 @@ const Layout = ({ children }) => {
           </Dropdown>
 
           <Nav.Link as={Link} to="/news">News</Nav.Link>
-          <Nav.Link as={Link} to="/lostandfound">Lost & Found</Nav.Link>
+          
+          <Dropdown>
+            <Dropdown.Toggle variant="dark" id="lost-and-found-dropdown">
+              Lost and Found
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark">
+              <Dropdown.Item as={Link} to="/lostandfound">Lost and Found</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/create-lostAndFound">Create Lost Item</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/lostrequests">Lost Requests</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+    
           <Nav.Link as={Link} to="/about">About</Nav.Link>
         </Nav>
 

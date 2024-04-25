@@ -1,0 +1,46 @@
+.lost-requests-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lost-request-card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.lost-request-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.lost-request-item {
+    margin-bottom: 5px;
+}
+
+.lost-request-action-buttons {
+    margin-top: 15px;
+}
+
+.lost-request-action-buttons button {
+    margin-right: 10px;
+}
+
+/* Button styles */
+.button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
