@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import MarqueeSlider from 'react-marquee-slider';
-import times from 'lodash/times';
-import './Home.css';
 import { newsItems } from './News';
-import { Link } from 'react-router-dom';
-
-const regularNewsItem = newsItems.filter(news => !news.spotlight);
+import ListingCard from './ListingCard'; // Import the ListingCard component
+import LostAndFoundCard from './LostAndFoundCard'; // Import the LostAndFoundCard component
+import './Home.css';
 
 function Home() {
   const [listings, setListings] = useState([]);
+  const [lostAndFounds, setLostAndFounds] = useState([]);
+
+  // Simulated news items
+  const regularNewsItem = newsItems.filter(news => !news.spotlight);
 
   useEffect(() => {
-    const fetchListings = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/listings');  // Adjust the URL as necessary
-        if (!response.ok) throw new Error('Failed to fetch listings');
-        const data = await response.json();
-        setListings(data);
+        const listingResponse = await fetch('http://localhost:3001/listings');
+        const lostAndFoundResponse = await fetch('http://localhost:3001/lostAndFounds');
+
+        if (!listingResponse.ok || !lostAndFoundResponse.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const listingData = await listingResponse.json();
+        const lostAndFoundData = await lostAndFoundResponse.json();
+
+        setListings(listingData);
+        setLostAndFounds(lostAndFoundData);
       } catch (error) {
-        console.error('Error fetching listings:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchListings();
+    fetchData();
   }, []);
 
-  const openArticle = (url) => {
-    const win = window.open(url, '_blank');
-    if (win) {
-      win.focus();
-    } else {
-      alert('Please allow popups for this website');
-    }
-  };
-  
   return (
     <div>
+      {/* News Section */}
       <div className='home-news-slider'>
-        <MarqueeSlider velocity={20}>
+        <MarqueeSlider velocity={8}>
           {regularNewsItem.map(news => (
             <a 
               key={`news-marquee-${news.id}`}  
@@ -53,20 +55,26 @@ function Home() {
           ))}
         </MarqueeSlider>
       </div>
-      <div className='home-listings-slider'>
-        <MarqueeSlider velocity={25}>
+
+      {/* Listings Section */}
+      <div className='home-listings'>
+        <h2>Listings</h2>
+        <div className='listings-container'>
+          
           {listings.map(listing => (
-            <div 
-              key={`listing-marquee-${listing.listingId}`}
-              className='home-listing-item' 
-              style={{ width: "100%" }}
-            >
-              <img src={`http://localhost:3001/uploads/${listing.image_url.replace(/\\/g, '/')}`} alt={listing.title} />
-              <h2>{listing.title}</h2>
-              <p>{`$${listing.price}`}</p>
-            </div>
+            <ListingCard key={listing.listingId} listing={listing}/>
           ))}
-        </MarqueeSlider>
+        </div>
+      </div>
+
+      {/* Lost & Found Section */}
+      <div className='home-lost-and-found'>
+        <h2>Lost & Found</h2>
+        <div className='lost-and-found-container'>
+          {lostAndFounds.map(lostAndFound => (
+            <LostAndFoundCard key={lostAndFound.itemId} lostAndFound={lostAndFound} />
+          ))}
+        </div>
       </div>
     </div>
   );

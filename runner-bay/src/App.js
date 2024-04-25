@@ -9,6 +9,7 @@ import About from './About'
 import LostAndFound from './LostAndFound';
 import CreateLostItem from './CreateLostItem';
 import LostAndFoundDetails from './LostAndFoundDetails';
+import LostRequests from './LostRequests';
 import Home from './Home';
 import Profile from './Profile';
 import Settings from './Settings';
@@ -33,6 +34,7 @@ function App() {
           <Route path="news" element={<News />} />
           <Route path="about" element={<About />} />
           <Route path="lostandfound" element={<LostAndFound />} />
+          <Route path="lostrequests" element={<LostRequests />} />
           <Route path="/create-lostAndFound" element={<CreateLostItem />} />
           <Route path= "lostAndFounds/:itemId" element={<LostAndFoundDetails />} />
           <Route path="profile" element={<Profile />} />
