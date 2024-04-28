@@ -39,6 +39,35 @@ Web app should run now.
     npm install
     ```
 
+5. Starting the Frontend
+    ```bash
+    npm start
+    ```
+
+6. Navigate to the Server directory:
+   ```bash
+   cd runner-bay/server
+   ```
+
+7. Install server dependices
+   ```bash
+   npm install
+    ```
+
+8. Start the Backend Server: Return to the root directory and start the server:
+   
+   cd..
+   ```bash
+   runner-bay> node server/
+   
+   Expected output:
+   
+   Connected to MySQL database
+   Server running on port 3001
+   ```
+
+9. Go back to frontend browser
+   
 
 ## Making Changes
 
