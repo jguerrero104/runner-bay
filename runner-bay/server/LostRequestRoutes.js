@@ -6,7 +6,7 @@ module.exports = function(db) {
     // Route to retrieve all contact requests for a lost item
     router.get('/lostrequests/:lostItemId', authenticateToken, async (req, res) => {
         const lostItemId = req.params.lostItemId;
-        
+
         try {
             const query = `
             SELECT lr.lostrequest_id, lr.lost_item_id, lr.request_id, lr.status, lr.created_at, lr.updated_at,
@@ -23,7 +23,13 @@ module.exports = function(db) {
                 res.status(404).json({ message: 'No contact requests found for the lost item.' });
             }
         } catch (error) {
-            console.error('Error fetching contact requests for lost item:', error);
+            console.error('Error fetching contact requests for lost item:', {
+                message: error.message,
+                stack: error.stack,
+                code: error.code,
+                errno: error.errno,
+                sql: error.sql,
+            });
             res.status(500).json({ message: 'Failed to fetch contact requests for lost item.' });
         }
     });
@@ -38,7 +44,13 @@ module.exports = function(db) {
 
             res.json({ message: 'Lost request accepted successfully.' });
         } catch (error) {
-            console.error('Error accepting lost request:', error);
+            console.error('Error accepting lost request:', {
+                message: error.message,
+                stack: error.stack,
+                code: error.code,
+                errno: error.errno,
+                sql: error.sql,
+            });
             res.status(500).json({ message: 'Failed to accept lost request.' });
         }
     });
@@ -53,7 +65,13 @@ module.exports = function(db) {
 
             res.json({ message: 'Lost request declined successfully.' });
         } catch (error) {
-            console.error('Error declining lost request:', error);
+            console.error('Error declining lost request:', {
+                message: error.message,
+                stack: error.stack,
+                code: error.code,
+                errno: error.errno,
+                sql: error.sql,
+            });
             res.status(500).json({ message: 'Failed to decline lost request.' });
         }
     });
