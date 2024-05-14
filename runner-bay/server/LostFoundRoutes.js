@@ -72,7 +72,7 @@ module.exports = function(db) {
                 return res.status(400).json({ message: 'There is already a pending contact request for this item.' });
             }
 
-            await db.query('INSERT INTO lostrequest (lost_item_id, request_id) VALUES (?, ?)', [itemId, userId]);
+            await db.query('INSERT INTO lostrequest (lost_item_id, request_id, message) VALUES (?, ?, ?)', [itemId, userId, message]);
             res.status(201).json({ message: 'Contact request sent successfully.' });
         } catch (error) {
             console.error('Error sending contact request:', {
@@ -97,11 +97,11 @@ module.exports = function(db) {
         if (!reportDate) return res.status(400).json({ message: 'Missing required field: reportDate' });
 
         const imageUrl = req.file ? req.file.filename : '';
-        const status = 'active';
+        const status = 'reported';
 
         try {
-            const sql = 'INSERT INTO lostandfound (itemName, description, location, image_url, reportDate, status) VALUES (?, ?, ?, ?, ?, ?)';
-            const values = [itemName, description, location, imageUrl, reportDate, status];
+            const sql = 'INSERT INTO lostandfound (itemName, description, location, image_url, reportDate, status, reporter_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+            const values = [itemName, description, location, imageUrl, reportDate, status, reporterId];
             await db.query(sql, values);
             res.status(201).json({ message: 'Lost item created successfully' });
         } catch (error) {
@@ -113,6 +113,43 @@ module.exports = function(db) {
                 sql: error.sql,
             });
             res.status(500).json({ message: 'Failed to create lost item', error: error.message });
+        }
+    });
+
+    // Delete a lost and found item by itemId
+    router.delete('/lostAndFounds/:itemId', authenticateToken, async (req, res) => {
+        const { itemId } = req.params;
+        const userId = req.user.userId;
+        const userRole = req.user.role;
+
+        try {
+            // Check if the item exists and if the current user is the owner or an admin
+            const [rows] = await db.query('SELECT reporter_id FROM lostandfound WHERE itemId = ?', [itemId]);
+            if (rows.length === 0) {
+                return res.status(404).json({ message: 'Lost item not found' });
+            }
+
+            const reporterId = rows[0].reporter_id;
+            if (reporterId !== userId && userRole !== 'admin') {
+                return res.status(403).json({ message: 'Unauthorized to delete this item' });
+            }
+
+            // Delete related rows in the lostrequest table
+            await db.query('DELETE FROM lostrequest WHERE lost_item_id = ?', [itemId]);
+
+            // Delete the lost item
+            await db.query('DELETE FROM lostandfound WHERE itemId = ?', [itemId]);
+
+            res.json({ message: 'Lost item deleted successfully' });
+        } catch (error) {
+            console.error('Error deleting lost item:', {
+                message: error.message,
+                stack: error.stack,
+                code: error.code,
+                errno: error.errno,
+                sql: error.sql,
+            });
+            res.status(500).json({ message: 'Failed to delete lost item' });
         }
     });
 

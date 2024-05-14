@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // Make sure the path is correct
+import { useAuth } from './AuthContext';
 import styles from './LostAndFoundDetails.module.css';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 const LostAndFoundDetails = () => {
-    const { token } = useAuth(); // Access the token using the useAuth hook
-    const [lostAndFound, setLostAndFound] = useState({});
+    const { id: userId, token, role } = useAuth();
+    const [lostAndFound, setLostAndFound] = useState(null);
     const [error, setError] = useState(null);
     const { itemId } = useParams();
+    const [isOwner, setIsOwner] = useState(false);
+    const isAdmin = role === 'admin';
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const fetchLostAndFound = async () => {
             try {
                 const response = await fetch(`http://localhost:3001/lostAndFounds/${itemId}`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`, // Pass the token in the request headers
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -23,34 +27,69 @@ const LostAndFoundDetails = () => {
                 }
                 const data = await response.json();
                 setLostAndFound(data);
+                setIsOwner(data.reporter_id === userId);
             } catch (error) {
                 setError(error.message);
                 console.error('Error fetching lost item:', error);
             }
         };
         fetchLostAndFound();
-    }, [itemId, token]); // Include token in the dependency array
+    }, [itemId, token, userId]);
 
-    // Function to contact the owner of the lost item
-    
     const handleContactOwner = async () => {
         try {
-            const requestOptions = {
+            const response = await fetch(`http://localhost:3001/lostAndFounds/${itemId}/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Pass the token in the request headers
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ message: 'Your message here' })
-            };
-            const response = await fetch(`http://localhost:3001/lostAndFounds/${itemId}/contact`, requestOptions);
+                body: JSON.stringify({ message })
+            });
             if (!response.ok) {
                 throw new Error('Failed to contact owner');
             }
             const data = await response.json();
-            console.log('Contact owner response:', data);
+            alert(data.message);
         } catch (error) {
             console.error('Error contacting owner:', error);
+            alert('Failed to contact owner. Please try again later.');
+        }
+    };
+
+    const updateLostAndFoundStatus = async (status) => {
+        try {
+            const response = await fetch(`http://localhost:3001/lostAndFounds/${itemId}/status`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status })
+            });
+            if (!response.ok) throw new Error('Failed to update item status.');
+            const data = await response.json();
+            alert(data.message);
+        } catch (error) {
+            console.error('Error updating item status:', error);
+            alert('Failed to update item status. Please try again later.');
+        }
+    };
+
+    const deleteLostAndFound = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/lostAndFounds/${itemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) throw new Error('Failed to delete item.');
+            alert('Item deleted successfully');
+            window.location.href = '/lostAndFounds';
+        } catch (error) {
+            console.error('Error deleting item:', error);
+            alert('Failed to delete item. Please try again later.');
         }
     };
 
@@ -58,7 +97,7 @@ const LostAndFoundDetails = () => {
         return <div>Error: {error}</div>;
     }
 
-    if (Object.keys(lostAndFound).length === 0) {
+    if (!lostAndFound) {
         return <div>Loading...</div>;
     }
 
@@ -69,9 +108,25 @@ const LostAndFoundDetails = () => {
                 <h1 className={styles['lost-and-found-detail-title']}>{lostAndFound.itemName}</h1>
                 <p className={styles['lost-and-found-detail-info']}><strong>Location:</strong> {lostAndFound.location}</p>
                 <p className={styles['lost-and-found-detail-description']}>{lostAndFound.description}</p>
+                {(isOwner || isAdmin) && (
+                    <DropdownButton id="dropdown-item-button" title="Change Status">
+                        <Dropdown.Item as="button" onClick={() => updateLostAndFoundStatus('reported')}>Reported</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => updateLostAndFoundStatus('claimed')}>Claimed</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => updateLostAndFoundStatus('expired')}>Expired</Dropdown.Item>
+                    </DropdownButton>
+                )}
+                <div className={`status-badge status-${lostAndFound.status.toLowerCase()}`}>
+                    {lostAndFound.status}
+                </div>
+                <textarea
+                    className="form-control"
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder="Type your message here..."
+                ></textarea>
                 <div className="d-flex justify-content-between mt-4">
-                    <button className="btn btn-primary" onClick={handleContactOwner}>Contact</button>
-                    <button className="btn btn-danger">Report Item</button>
+                    <button className="btn btn-primary" onClick={handleContactOwner}>Contact Owner</button>
+                    {(isOwner || isAdmin) && <button onClick={deleteLostAndFound} className="btn btn-danger">Delete Item</button>}
                 </div>
             </div>
             <div className={styles['lost-and-found-detail-footer']}>
