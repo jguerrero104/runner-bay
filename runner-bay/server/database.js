@@ -1,12 +1,13 @@
 const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 async function connectToDatabase() {
   try {
     const db = await mysql.createConnection({
-      host: 'runner-bay-db.cbmmisgs8f96.us-east-2.rds.amazonaws.com',
-      user: 'admin',
-      password: 'runnerbay123',
-      database: 'runner-bay'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
     });
 
     console.log('Connected to MySQL database');
